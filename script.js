@@ -16,6 +16,12 @@
     fastBrowser = false;
   }
 
+  if (agent.indexOf('Firefox') > 0) {
+    fastBrowser = false;
+  }
+
+
+
   Kaleidoscope = (function() {
     class Kaleidoscope {
       constructor(options1 = {}) {
@@ -169,7 +175,7 @@
   kaleidoscope = new Kaleidoscope({
     image: image,
     slices: 12,
-    alpha: false,
+    alpha: true,
     radius: initRadius,
     zoom: initZoom,
     pixelRatio: initPixelRatio,
@@ -183,7 +189,7 @@
   kaleidoscope.domElement.style.left = '50%';
   kaleidoscope.domElement.style.top = '50%';
   kaleidoscope.domElement.style.width = kaleidoscope.domElement.style.height = kaleidoscope.radius * 2 + 'px';
-  kaleidoscope.domElement.style.backgroundColor = '#fff';
+  kaleidoscope.domElement.style.background = '#fff';
   document.body.appendChild(kaleidoscope.domElement);
 
 
