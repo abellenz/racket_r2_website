@@ -29,6 +29,7 @@ html, body {
 .info .about {
   padding: 20px 0;
   background: rgba(255, 255, 255, 0.8);
+  border-radius: 30px;
 }
 
 .info .about h2 {

@@ -225,17 +225,11 @@
 
   // Mouse events
   tx = kaleidoscope.offsetX;
-
   ty = kaleidoscope.offsetY;
-
   tr = kaleidoscope.offsetRotation;
-
   winWidth = window.innerWidth;
-
   winHeight = window.innerHeight;
-
   pageX = 0;
-
   pageX_last = 0;
 
   onMouseMoved = (event) => {
@@ -254,7 +248,6 @@
   };
 
   window.addEventListener('mousemove', onMouseMoved, false);
-
 
   // Init
   options = {
