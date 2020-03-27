@@ -233,21 +233,45 @@
   pageX_last = 0;
 
   onMouseMoved = (event) => {
-    var cx, cy, dx, dy, hx, hy;
+
     pageX = event.pageX;
+    dy = event.pageY / winHeight;
+    var cx, cy, dx, dy, hx, hy;
     cx = winWidth / 2;
     cy = winHeight / 2;
     dx = pageX / winWidth;
-    dy = event.pageY / winHeight;
     hx = dx - 0.5;
     hy = dy - 0.5;
     tx = hx * kaleidoscope.radius * -2;
     ty = hy * kaleidoscope.radius * 2;
     tr = (Math.atan2(hy, hx)) * 1;
     return update;
+
+  };
+
+  onTouch = (event) => {
+    var cx, cy, dx, dy, hx, hy;
+
+    event.preventDefault(); // we don't want to scroll
+    touch = event.touches[0];
+    pageX = touch.clientX;
+    dy = touch.clientY / winHeight;
+    
+    cx = winWidth / 2;
+    cy = winHeight / 2;
+    dx = pageX / winWidth;
+    hx = dx - 0.5;
+    hy = dy - 0.5;
+    tx = hx * kaleidoscope.radius * -2;
+    ty = hy * kaleidoscope.radius * 2;
+    tr = (Math.atan2(hy, hx)) * 1;
+    return update;
+
   };
 
   window.addEventListener('mousemove', onMouseMoved, false);
+  window.addEventListener('touchstart', onTouch, false)
+
 
   // Init
   options = {
