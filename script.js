@@ -59,9 +59,10 @@
 
       draw() {
         var cx, i, index, radius, ref, results, scale, step;
-        // moved out of the draw function so as not to be repeated - using clearRect to clear canvas instead
-        // this.domElement.width = this.domElement.height = this.radius * 2 * this.pixelRatio;
-        this.context.clearRect(0, 0, this.domElement.width, this.domElement.height);
+
+        this.domElement.width = this.domElement.height = this.radius * 2 * this.pixelRatio;
+        // the line below might be slightly faster than the line above in Safari, but needs to be tested on Android/chrome because it likely produces a black background there 
+        // this.context.clearRect(0, 0, this.domElement.width, this.domElement.height);
         this.context.fillStyle = this.context.createPattern(this.image, 'repeat');
         scale = this.zoom;
         step = this.TWO_PI / this.slices;
@@ -198,7 +199,7 @@
 
   };
 
-  onTouch = (event) => {
+  var onTouch = (event) => {
     var cx, cy, dx, dy, hx, hy;
 
     event.preventDefault(); // we don't want to scroll
