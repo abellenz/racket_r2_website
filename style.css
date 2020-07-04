@@ -4,7 +4,9 @@ html, body {
   overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, HelveticaNeue, Helvetica, Arial, sans-serif;
 }
-
+a {
+  text-decoration: none;
+}
 /* Info */
 .info {
   font-size: 24px;
@@ -20,6 +22,22 @@ html, body {
   z-index: 1000;
   opacity: 1;
 }
+
+.video {
+  position: absolute;
+  text-align: right;
+  color: #000;
+  width: 90%;
+  height: 90%;
+  margin-left: -45%;
+  margin-top: -30%;
+  left: 50%;
+  top: 50%;
+  z-index: 10000;
+  opacity: 1;
+  display:none;
+}
+
 @media (max-width: 768px) {
   .info {
     width: 300px;
@@ -55,20 +73,31 @@ html, body {
   }
 }
 
-.info .about h3 {
-  display: block;
+.info .about h3, .video h3 {
+  display: inline-block;
   font-weight: 100;
   font-size: 22px;
-  margin: 0;
+  margin: 10px;
 }
-.info .about a {
+.info .about .button, .video .button {
   display: inline-block;
+  min-width:70px;
   padding: 10px 20px;
   text-decoration: none;
   background-color: #ffcc00;
   color: #000;
   border-radius: 10px;
   margin: 0;
+}
+.video .button {
+  display: inline-block;
+  min-width:0;
+  text-align: center;
+  overflow: hidden;
+  background-color: #ddd;
+  color: #999;
+  border-radius: 20px;
+  /* margin-top:20px; */
 }
 
 .links {

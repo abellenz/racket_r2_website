@@ -1,10 +1,49 @@
-(function() {
+
+
+
+
+document.getElementById('videoBut').addEventListener("click", function() {
+  if (!fastBrowser) {
+    window.location = "video.html";
+  } else {
+    delete kaleidoscope
+    document.getElementById('kaleidoscope').parentNode.removeChild(document.getElementById('kaleidoscope'));
+    document.getElementById('kaleidoscope2').parentNode.removeChild(document.getElementById('kaleidoscope2'));
+  }
+  document.getElementById('video').style.display = 'block';
+  document.getElementById('info').style.display = 'none';
+});
+
+document.getElementById('closeBut').addEventListener("click", function() {
+  scopes = loadScopes();
+  document.getElementById('video').style.display = 'none';
+  document.getElementById('info').style.display = 'block';
+});
+
+// Detect fast browser
+agent = navigator.userAgent;
+console.log(agent);
+fastBrowser = true;
+console.log(fastBrowser);
+if (agent.indexOf('Safari') > 0 && agent.indexOf('Chrome') < 0) {
+  fastBrowser = false;
+}
+if (agent.indexOf('Android') > 0) {
+  fastBrowser = false;
+}
+if (agent.indexOf('Firefox') > 0) {
+  fastBrowser = false;
+}
+
+
+loadScopes = function() {
   var DragDrop, Kaleidoscope, agent, fastBrowser, image, image2, initDrift, initDriftRotation, initPixelRatio, initRadius, initZoom, kaleidoscope, kaleidoscope2, onChange, onMouseMoved, options, pageX, pageX_last, tr, tx, ty, update, winHeight, winWidth, delta, delta2, theta, theta2;
 
   // Detect fast browser
   agent = navigator.userAgent;
   console.log(agent);
   fastBrowser = true;
+  console.log(fastBrowser);
   if (agent.indexOf('Safari') > 0 && agent.indexOf('Chrome') < 0) {
     fastBrowser = false;
   }
@@ -61,7 +100,7 @@
         var cx, i, index, radius, ref, results, scale, step;
 
         this.domElement.width = this.domElement.height = this.radius * 2 * this.pixelRatio;
-        // the line below might be slightly faster than the line above in Safari, but needs to be tested on Android/chrome because it likely produces a black background there 
+        // the line below might be slightly faster than the line above in Safari, but needs to be tested on Android/chrome because it likely produces a black background there
         // this.context.clearRect(0, 0, this.domElement.width, this.domElement.height);
         this.context.fillStyle = this.context.createPattern(this.image, 'repeat');
         scale = this.zoom;
@@ -116,9 +155,9 @@
   };
 
   if (fastBrowser) { // large image for larger kaleidoscope
-    image.src = 'https://share.getcloudapp.com/items/X6uzezGK/download'; // large image that includes all the devices
+    image.src = 'img/layer1_fast.jpg';
   } else {
-    image.src = 'https://share.getcloudapp.com/items/kpuYKnLZ/download';
+    image.src = 'img/layer1_slow.jpg'; // smaller image that includes all the devices
   }
 
   if (fastBrowser) {
@@ -127,13 +166,14 @@
     image2.onload = () => {
       return kaleidoscope2.draw();
     };
-    image2.src = 'https://share.getcloudapp.com/items/Qwu7E5JX/download';
+    image2.src = 'img/layer2_fast.png';
     initRadius = 800;
     initPixelRatio = 2;
     initZoom = 1;
     initDrift = 0.5;
     initDriftRotation = 0.005;
   }
+
 
   kaleidoscope = new Kaleidoscope({
     image: image,
@@ -153,6 +193,7 @@
   kaleidoscope.domElement.style.top = '50%';
   kaleidoscope.domElement.style.width = kaleidoscope.domElement.style.height = kaleidoscope.radius * 2 + 'px';
   kaleidoscope.domElement.style.background = '#fff';
+  kaleidoscope.domElement.id = 'kaleidoscope'; //allows access for removal when video plays
   document.body.appendChild(kaleidoscope.domElement);
 
   if (fastBrowser) {
@@ -170,6 +211,7 @@
     kaleidoscope2.domElement.style.left = '50%';
     kaleidoscope2.domElement.style.top = '50%';
     kaleidoscope2.domElement.style.width = kaleidoscope2.domElement.style.height = kaleidoscope2.radius * 2 + 'px';
+    kaleidoscope2.domElement.id = 'kaleidoscope2'; //allows access for removal when video plays
     document.body.appendChild(kaleidoscope2.domElement);
   }
 
@@ -183,7 +225,6 @@
   pageX_last = 0;
 
   onMouseMoved = (event) => {
-
     pageX = event.pageX;
     dy = event.pageY / winHeight;
     var cx, cy, dx, dy, hx, hy;
@@ -196,7 +237,6 @@
     ty = hy * kaleidoscope.radius * 2;
     tr = (Math.atan2(hy, hx)) * 1;
     return update;
-
   };
 
   var onTouch = (event) => {
@@ -264,4 +304,6 @@
     return kaleidoscope.draw();
   };
 
-}).call(this);
+
+}
+var scopes = loadScopes();
