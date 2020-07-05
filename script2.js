@@ -60,7 +60,7 @@ loadScopes = function() {
         var key, ref, ref1, val;
         this.options = options1;
         this.defaults = {
-          offsetRotation: 0.5, //helps place interesting devices in view at start for mobile
+          offsetRotation: 3, //helps place interesting devices in view at start for mobile
           pixelRatio: 2, //pixels per point
           zoom: 1, //scale the image
           offsetX: 0.0,
